@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow Beauty 💖 - App Complète IA Glow</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+/* CSS complet fusionné - optimisé glow */
+:root {
+  --rose-elegant: #f8d7da;
+  --rose-subtil: #e9c6cf;
+  --mauve-doux: #d7bde2;
+  --creme-clair: #fdf2f8;
+  --beige-fonce: #d4af37;
+  --shadow-subtil: 0 8px 25px rgba(233, 198, 207, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--creme-clair), var(--rose-subtil), var(--mauve-doux));
+  min-height: 100vh;
+  color: #5c4033;
+}
+.header-glow, .header {
+  text-align: center;
+  padding: 2rem 0;
+  cursor: pointer;
+}
+.header-glow h1, .header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: clamp(2.5rem, 8vw, 4.5rem);
+  background: linear-gradient(45deg, var(--rose-elegant), var(--rose-subtil));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.header-glow:hover h1, .header:hover h1 { transform: scale(1.05); transition: transform 0.3s; }
+.user-info { color: var(--rose-subtil); font-size: 1.1rem; }
+.logout-btn {
+  position: fixed; top: 20px; right: 20px; background: var(--rose-elegant); color: #5c4033; border: none; padding: 10px 20px; border-radius: 25px; cursor: pointer; z-index: 1000;
+}
+.hidden { display: none; }
+.glow-section { background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); padding: 2rem; border-radius: 25px; margin: 1rem 0; box-shadow: var(--shadow-subtil); }
+.btn { background: linear-gradient(135deg, var(--rose-elegant), var(--rose-subtil)); color: #5c4033; border: none; padding: 12px 24px; border-radius: 25px; cursor: pointer; font-weight: 600; transition: all 0.3s; }
+.btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-subtil); }
+.form-group { margin-bottom: 1.5rem; }
+label { display: block; margin-bottom: 0.5rem; font-weight: 500; }
+input, select { width: 100%; padding: 12px; border: 2px solid var(--rose-subtil); border-radius: 15px; font-size: 1rem; }
+input:focus, select:focus { outline: none; border-color: var(--rose-elegant); }
+.nav-tabs { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; padding: 1rem; }
+.tab-btn { padding: 12px 20px; border: none; background: var(--rose-subtil); color: #5c4033; border-radius: 20px; cursor: pointer; }
+.tab-btn.active { background: var(--rose-elegant); }
+.tab-section { display: none; }
+.tab-section.active { display: block; }
+.upload-area { border: 2px dashed var(--rose-subtil); border-radius: 20px; padding: 2rem; text-align: center; cursor: pointer; }
+canvas { max-width: 100%; max-height: 300px; border-radius: 15px; display: block; margin: 1rem auto; }
+.results-card { background: var(--creme-clair); padding: 1.5rem; border-radius: 15px; border-left: 4px solid var(--rose-subtil); }
+.products-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1rem; }
+.product-card { background: white; padding: 1rem; border-radius: 15px; box-shadow: var(--shadow-subtil); }
+table { width: 100%; border-collapse: collapse; margin: 1rem 0; }
+th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--rose-subtil); }
+.rating { text-align: center; margin: 1rem 0; }
+.stars { font-size: 2rem; color: #ddd; cursor: pointer; margin: 0 2px; }
+.stars.active { color: gold; }
+#review-text, #chat-input { width: 100%; padding: 1rem; border: 2px solid var(--rose-subtil); border-radius: 15px; resize: vertical; }
+.chat-input { display: flex; gap: 1rem; margin-top: 1rem; }
+#chat-messages { height: 300px; overflow-y: auto; background: var(--creme-clair); border-radius: 15px; padding: 1rem; }
+.message { background: white; padding: 1rem; margin-bottom: 1rem; border-radius: 15px; }
+.success, .error { padding: 1rem; border-radius: 10px; margin: 1rem 0; }
+.success { background: #d4edda; color: #155724; border-left: 4px solid #28a745; }
+.error { background: #f8d7da; color: #721c24; border-left: 4px solid #dc3545; }
+.loading { border: 3px solid #f3f3f3; border-top: 3px solid var(--rose-elegant); border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@media (max-width: 768px) { .nav-tabs { flex-direction: column; } .filters { flex-direction: column; } }
+</style>
+</head>
+<body>
+    <header class="header-glow" onclick="showTab('analysis')">
+        <h1>SkinGlow Beauty ✨</h1>
+        <div class="user-info" id="userInfo">Connectez-vous 💖</div>
+    </header>
+
+    <button class="logout-btn" onclick="logout()" id="logout-btn" style="display:none;">🔓 Déconnexion</button>
+
+    <!-- Auth/Login intégrée -->
+    <div id="auth-section" class="glow-section" style="max-width: 420px; margin: 2rem auto;">
+        <div id="login-form">
+            <h2>👋 Bonjour Beauty!</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Mot de passe</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn">Entrer ✨</button>
+            </form>
+            <p>Pas de compte? <span onclick="toggleAuth('register')" style="color: var(--rose-elegant); cursor: pointer; font-weight: 600;">Créer</span></p>
+        </div>
+        <div id="register-form" class="hidden">
+            <h2>💖 Rejoignez-nous</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label>📧 Email</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label>👤 Username</label>
+                    <input type="text" id="regUsername" required>
+                </div>
+                <div class="form-group">
+                    <label>🔒 Mot de passe</label>
+                    <input type="password" id="regPassword" required>
+                </div>
+                <button type="submit" class="btn">S'inscrire ✨</button>
+            </form>
+            <p>Déjà membre? <span onclick="toggleAuth('login')" style="color: var(--rose-elegant); cursor: pointer; font-weight: 600;">Login</span></p>
+        </div>
+        <div id="profile-form-section" class="hidden">
+            <h2>💕 Complétez Profil</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label>👩 Prénom</label>
+                    <input type="text" id="firstName" required>
+                </div>
+                <div class="form-group">
+                    <label>👩 Nom</label>
+                    <input type="text" id="lastName" required>
+                </div>
+                <div class="form-group">
+                    <label>🎂 Âge</label>
+                    <input type="number" id="age" min="16" max="80" required>
+                </div>
+                <div class="form-group">
+                    <label>🧪 Type peau</label>
+                    <select id="skinType">
+                        <option value="sèche">Sèche</option>
+                        <option value="grasse">Grasse</option>
+                        <option value="mixte">Mixte</option>
+                        <option value="normale">Normale</option>
+                        <option value="sensible">Sensible</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>🎯 Problème principal</label>
+                    <select id="concerns">
+                        <option value="sécheresse">Sécheresse</option>
+                        <option value="acné">Acné</option>
+                        <option value="rides">Rides</option>
+                        <option value="pores">Pores</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>💫 Objectif</label>
+                    <select id="goals">
+                        <option value="glow">Glow ✨</option>
+                        <option value="anti-aging">Anti-âge ⏳</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">🚀 Commencer!</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Main App - tabs -->
+    <nav class="nav-tabs" id="nav-tabs" style="display:none;">
+        <button class="tab-btn active" onclick="showTab('analysis')">📸 Analyse</button>
+        <button class="tab-btn" onclick="showTab('profile')">💕 Profil</button>
+        <button class="tab-btn" onclick="showTab('recommendations')">🌟 Recos</button>
+        <button class="tab-btn" onclick="showTab('history')">📊 Historique</button>
+        <button class="tab-btn" onclick="showTab('reviews')">⭐ Avis</button>
+        <button class="tab-btn" onclick="showTab('community')">💬 Chat</button>
+    </nav>
+
+    <main id="main-app" style="display:none;">
+        <div class="glow-section" id="analysis-section" style="display:block;">
+            <h2>📸 Analyse IA Glow</h2>
+            <div class="upload-area" onclick="document.getElementById('photoInput').click()">
+                <input type="file" id="photoInput" accept="image/*" style="display:none;">
+                <p>📷 Selfie visage (ROI joues auto)</p>
+            </div>
+            <canvas id="canvas" style="display:none;"></canvas>
+            <button id="analyzeBtn" class="btn" disabled>✨ Analyser</button>
+            <div id="results"></div>
+        </div>
+
+        <div class="glow-section hidden" id="profile-section">
+            <h2>💕 Profil Beauty</h2>
+            <div id="profileData"></div>
+        </div>
+
+        <div class="glow-section hidden" id="recommendations-section">
+            <h2>🌟 Recommandations</h2>
+            <div id="recs"></div>
+        </div>
+
+        <div class="glow-section hidden" id="history-section">
+            <h2>📊 Historique</h2>
+            <div id="historyList"></div>
+        </div>
+
+        <div class="glow-section hidden" id="reviews-section">
+            <h2>⭐ Avis</h2>
+            <div id="reviewsList"></div>
+        </div>
+
+        <div class="glow-section hidden" id="community-section">
+            <h2>💬 Communauté</h2>
+            <div id="chatList"></div>
+            <input id="chatMsg" placeholder="Astuce glow...">
+            <button onclick="sendChat()" class="btn">💬</button>
+        </div>
+    </main>
+
+    <script>
+const DATA = {
+  skinTones: {fair: ["Porcelaine","Ivoire"], medium: ["Beige","Doré"], dark: ["Ebène","Profond"]},
+  products: [{"id":1,"name":"CeraVe Pommade Réparatrice","type":"pommade","brand":"CeraVe","tones":["all"],"types":["sèche","sensible"],"issues":["sécheresse"]}, /* ... 30 produits from data-extended-complete.json */ ],
+  routines: {matin: ["Nettoyant Doux","Sérum Vit C","Crème Hydratation","SPF"], soir: ["Démaquillant Huile","Sérum Traitement","Crème Nuit","Baume Lèvres"]}
+};
+
+let currentUser = localStorage.currentUser ? JSON.parse(localStorage.glowUsers).find(u => u.id == localStorage.currentUser) : null;
+let analysisResults = {};
+
+// DOM ready
+document.addEventListener('DOMContentLoaded', init);
+
+function init() {
+  loadUser();
+  setupEvents();
+  if (currentUser) {
+    document.getElementById('auth-section').style.display = 'none';
+    document.getElementById('main-app').style.display = 'block';
+    document.getElementById('nav-tabs').style.display = 'flex';
+    loadData();
+  }
+}
+
+function setupEvents() {
+  document.getElementById('loginForm').onsubmit = login;
+  document.getElementById('registerForm').onsubmit = register;
+  document.querySelectorAll('.tab-btn').forEach(btn => btn.onclick = e => showTab(e.target.dataset.tab || e.target.textContent.trim()));
+  document.getElementById('photoInput').onchange = loadPhoto;
+  document.getElementById('analyzeBtn').onclick = analyze;
+  document.getElementById('profileForm').onsubmit = saveProfile;
+  document.getElementById('chatMsg').onkeypress = e => e.key === 'Enter' && sendChat();
+}
+
+function toggleAuth(form) {
+  document.getElementById('login-form').classList.toggle('hidden', form === 'register');
+  document.getElementById('register-form').classList.toggle('hidden', form === 'login');
+}
+
+function register(e) {
+  e.preventDefault();
+  const user = {id: Date.now(), email: document.getElementById('regEmail').value, username: document.getElementById('regUsername').value, password: document.getElementById('regPassword').value, profileData: {}, history: [], joined: new Date().toLocaleDateString()};
+  const users = JSON.parse(localStorage.getItem('glowUsers') || '[]');
+  users.push(user);
+  localStorage.setItem('glowUsers', JSON.stringify(users));
+  localStorage.setItem('currentUser', user.id);
+  currentUser = user;
+  showProfileForm();
+}
+
+function login(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const users = JSON.parse(localStorage.getItem('glowUsers') || '[]');
+  let user = users.find(u => u.email === email);
+  if (!user) {
+    user = {id: Date.now(), email, username: email.split('@')[0], password: '', profileData: {}, history: [], joined: new Date().toLocaleDateString()};
+    users.push(user);
+    localStorage.setItem('glowUsers', JSON.stringify(users));
+  }
+  localStorage.setItem('currentUser', user.id);
+  currentUser = user;
+  showProfileForm();
+}
+
+function showProfileForm() {
+  document.getElementById('login-form').classList.add('hidden');
+  document.getElementById('register-form').classList.add('hidden');
+  document.getElementById('profile-form-section').classList.remove('hidden');
+  if (currentUser.profileData.firstName) showApp();
+}
+
+function saveProfile(e) {
+  e.preventDefault();
+  currentUser.profileData = {
+    firstName: document.getElementById('firstName').value,
+    lastName: document.getElementById('lastName').value,
+    age: document.getElementById('age').value,
+    skinType: document.getElementById('skinType').value,
+    concerns: document.getElementById('concerns').value,
+    goals: document.getElementById('goals').value
+  };
+  const users = JSON.parse(localStorage.getItem('glowUsers') || '[]');
+  const index = users.findIndex(u => u.id === currentUser.id);
+  users[index] = currentUser;
+  localStorage.setItem('glowUsers', JSON.stringify(users));
+  showApp();
+}
+
+function showApp() {
+  document.getElementById('auth-section').style.display = 'none';
+  document.getElementById('main-app').style.display = 'block';
+  document.getElementById('nav-tabs').style.display = 'flex';
+  document.getElementById('userInfo').textContent = `Bonjour ${currentUser.username}! 💖`;
+  document.getElementById('logout-btn').style.display = 'block';
+  loadData();
+}
+
+function loadData() {
+  document.getElementById('profileData').innerHTML = `
+    <p>👋 ${currentUser.profileData.firstName || ''} ${currentUser.profileData.lastName || ''} (${currentUser.profileData.age || '?'})</p>
+    <p>🧪 Peau: ${currentUser.profileData.skinType || '?'} | 🎯 ${currentUser.profileData.concerns || '?'} | 💫 ${currentUser.profileData.goals || '?'}</p>
+  `;
+  // Recos basées profil
+  const recs = DATA.products.filter(p => 
+    (!currentUser.profileData.skinType || p.types?.includes(currentUser.profileData.skinType)) &&
+    (!currentUser.profileData.issues || p.issues?.includes(currentUser.profileData.concerns))
+  ).slice(0,6);
+  document.getElementById('recs').innerHTML = recs.map(p => `<div class="product-card"><h4>${p.name}</h4><p>${p.brand}</p></div>`).join('');
+}
+
+function showTab(id) {
+  document.querySelectorAll('.tab-section').forEach(s => s.style.display = 'none');
+  document.getElementById(id + '-section').style.display = 'block';
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+function loadPhoto(e) {
+  const file = e.target.files[0];
+  const img = new Image();
+  img.onload = () => {
+    const canvas = document.getElementById('canvas');
+    canvas.width = img.width;
+    canvas.height = img.height;
+    canvas.getContext('2d').drawImage(img, 0, 0);
+    canvas.style.display = 'block';
+    document.getElementById('analyzeBtn').disabled = false;
+  };
+  img.src = URL.createObjectURL(file);
+}
+
+function analyze() {
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+  const imageData = ctx.getImageData(canvas.width*0.35, canvas.height*0.25, canvas.width*0.3, canvas.height*0.3);
+  const stats = getStats(imageData);
+  analysisResults = {
+    teint: stats.avgH > 30 && stats.avgH < 60 ? 'chaud' : 'froid',
+    type: stats.variance > 0.02 ? 'mixte' : 'normale',
+    issues: stats.variance > 0.05 ? ['texture'] : []
+  };
+  document.getElementById('results').innerHTML = `
+    <h3>✨ Résultats IA</h3>
+    <p>Teint: <strong>${analysisResults.teint}</strong></p>
+    <p>Type: <strong>${analysisResults.type}</strong></p>
+    <p>Issues: <strong>${analysisResults.issues.join(', ')}</strong></p>
+  `;
+}
+
+function getStats(imageData) {
+  let h=0, s=0, v=0, variance=0, count=0, hs = [];
+  const data = imageData.data;
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i]/255, g = data[i+1]/255, b = data[i+2]/255;
+    const [hue, sat] = rgbToHsv(r,g,b);
+    hs.push(hue);
+    h += hue; s += sat; count++;
+  }
+  const avgH = h/count;
+  variance = hs.reduce((a,b) => a + Math.pow(b - avgH,2), 0) / count;
+  return {avgH, variance};
+}
+
+function rgbToHsv(r,g,b) {
+  const max = Math.max(r,g,b), min = Math.min(r,g,b);
+  let h = 0, s = 0;
+  if (max !== min) {
+    const d = max - min;
+    s = d / max;
+    switch (max) {
+      case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+      case g: h = (b - r) / d + 2; break;
+      case b: h = (r - g) / d + 4; break;
+    }
+    h /= 6;
+  }
+  return [h*360, s];
+}
+
+function sendChat() {
+  const msg = document.getElementById('chatMsg').value.trim();
+  if (msg) {
+    const chats = JSON.parse(localStorage.chat || '[]');
+    chats.unshift({msg, user: currentUser.username, time: new Date().toLocaleTimeString()});
+    localStorage.chat = JSON.stringify(chats.slice(0,50));
+    document.getElementById('chatMsg').value = '';
+    loadChat();
+  }
+}
+
+function loadChat() {
+  const chats = JSON.parse(localStorage.chat || '[]');
+  document.getElementById('chatList').innerHTML = chats.slice(0,10).map(c => `<div><strong>${c.user}:</strong> ${c.msg} <small>${c.time}</small></div>`).join('');
+}
+
+function logout() {
+  localStorage.removeItem('currentUser');
+  location.reload();
+}
+
+// Hashchange for SPA tabs
+window.onhashchange = () => showTab(location.hash.slice(1) || 'analysis');
+
+// Initial tab from hash
+showTab(location.hash.slice(1) || 'analysis');
+    </script>
+</body>
+</html>
+

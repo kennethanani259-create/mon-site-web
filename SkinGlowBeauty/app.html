@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow Beauty - Tableau de bord</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+:root {
+  --rose-elegant: #f8d7da;
+  --rose-subtil: #e9c6cf;
+  --mauve-doux: #d7bde2;
+  --creme-clair: #fdf2f8;
+  --beige-nude: #f5f5dc;
+  --beige-fonce: #d4af37;
+  --shadow-subtil: 0 4px 12px rgba(244, 215, 218, 0.2);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--creme-clair), var(--rose-subtil));
+  min-height: 100vh;
+  color: #5c4033;
+}
+.header {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255,255,255,0.9);
+  border-bottom: 1px solid var(--rose-subtil);
+}
+.header h1 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: var(--beige-fonce);
+  margin-bottom: 0.5rem;
+}
+.user-info {
+  color: var(--rose-subtil);
+  font-size: 1.1rem;
+}
+.nav-tabs {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 1rem;
+  background: white;
+  margin-bottom: 1rem;
+}
+.tab-btn {
+  padding: 10px 20px;
+  border: none;
+  background: var(--rose-subtil);
+  color: #5c4033;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+}
+.tab-btn.active, .tab-btn:hover {
+  background: var(--rose-elegant);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-subtil);
+}
+.tab-content {
+  display: none;
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.tab-content.active {
+  display: block;
+}
+.tab-section {
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--shadow-subtil);
+  margin-bottom: 2rem;
+}
+h2 {
+  font-family: 'Dancing Script', cursive;
+  color: var(--rose-elegant);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+.upload-area {
+  border: 2px dashed var(--rose-subtil);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin: 1rem 0;
+}
+.upload-area:hover {
+  border-color: var(--rose-elegant);
+  background: var(--creme-clair);
+}
+.photo-btn {
+  background: linear-gradient(135deg, var(--rose-elegant), var(--rose-subtil));
+  color: #5c4033;
+  padding: 1rem 2rem;
+  border-radius: 25px;
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: inline-block;
+  transition: all 0.3s;
+  box-shadow: var(--shadow-subtil);
+}
+.photo-btn:hover {
+  transform: translateY(-2px);
+}
+canvas {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 15px;
+  margin: 1rem auto;
+  display: block;
+}
+.results-card {
+  background: var(--creme-clair);
+  padding: 1.5rem;
+  border-radius: 15px;
+  border-left: 4px solid var(--rose-subtil);
+}
+.filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin: 1.5rem 0;
+}
+select, button {
+  padding: 10px 15px;
+  border: 2px solid var(--rose-subtil);
+  border-radius: 20px;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+select:hover, button:hover {
+  border-color: var(--rose-elegant);
+  transform: translateY(-1px);
+}
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.product-card {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-subtil);
+  transition: transform 0.3s;
+}
+.product-card:hover {
+  transform: translateY(-5px);
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+th, td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--rose-subtil);
+}
+th {
+  background: var(--rose-subtil);
+  color: #5c4033;
+}
+.rating {
+  text-align: center;
+  margin: 1rem 0;
+}
+.stars {
+  font-size: 2rem;
+  color: #e2e8f0;
+  cursor: pointer;
+  margin: 0 5px;
+  transition: color 0.2s;
+}
+.stars.active {
+  color: #fbbf24;
+}
+#review-text {
+  width: 100%;
+  min-height: 100px;
+  padding: 1rem;
+  border: 2px solid var(--rose-subtil);
+  border-radius: 15px;
+  margin: 1rem 0;
+  resize: vertical;
+  font-family: inherit;
+}
+#chat-messages {
+  height: 300px;
+  overflow-y: auto;
+  background: var(--creme-clair);
+  border-radius: 15px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 2px solid var(--rose-subtil);
+}
+.message {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 20px;
+  box-shadow: var(--shadow-subtil);
+}
+.chat-input {
+  display: flex;
+  gap: 1rem;
+}
+#chat-input {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid var(--rose-subtil);
+  border-radius: 25px;
+  font-family: inherit;
+}
+.logout-btn {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--rose-elegant);
+  color: #5c4033;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  box-shadow: var(--shadow-subtil);
+}
+@media (max-width: 768px) {
+  .nav-tabs { flex-direction: column; align-items: center; }
+  .filters { flex-direction: column; }
+}
+    </style>
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()">🔓 Déconnexion</button>
+    
+    <header class="header">
+        <h1>✨ SkinGlow Beauty</h1>
+        <div class="user-info" id="userInfo">Chargement...</div>
+    </header>
+
+    <nav class="nav-tabs">
+        <button class="tab-btn active" onclick="showTab('analysis')">🔍 Analyse</button>
+        <button class="tab-btn" onclick="showTab('profile')">👤 Profil</button>
+        <button class="tab-btn" onclick="showTab('recommendations')">💄 Recommandations</button>
+        <button class="tab-btn" onclick="showTab('history')">📊 Historique</button>
+        <button class="tab-btn" onclick="showTab('reviews')">⭐ Avis</button>
+        <button class="tab-btn" onclick="showTab('community')">💬 Communauté</button>
+    </nav>
+
+    <div class="tab-content">
+        <section id="analysis-section" class="tab-section active">
+            <h2>Analyse votre peau</h2>
+            <div class="upload-area">
+                <input type="file" id="photo-input" accept="image/*" style="display:none;">
+                <label for="photo-input" class="photo-btn">📷 Prendre photo visage</label>
+            </div>
+            <canvas id="analysis-canvas" style="display:none;"></canvas>
+            <button id="analyze-btn" disabled class="btn">Analyser IA</button>
+            <div id="analysis-results" class="results-card" style="display:none;"></div>
+        </section>
+
+        <section id="profile-section" class="tab-section">
+            <h2>Votre profil personnalisé</h2>
+            <form id="profile-form">
+                <div class="form-group">
+                    <label>Objectifs:</label>
+                    <select id="goals">
+                        <option value="hydrate">💧 Hydratation</option>
+                        <option value="anti-aging">⏳ Anti-âge</option>
+                        <option value="brighten">✨ Éclat</option>
+                        <option value="acne_control">🎯 Anti-acné</option>
+                        <option value="general">⚖️ Équilibré</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn">💾 Sauvegarder</button>
+            </form>
+            <div id="profile-display" class="results-card"></div>
+        </section>
+
+        <section id="recommendations-section" class="tab-section">
+            <h2>🎁 Recommandations personnalisées</h2>
+            <div class="filters">
+                <select id="price-filter">
+                    <option value="">💰 Tous prix</option>
+                    <option value="low">€ Budget</option>
+                    <option value="medium">€€ Moyen</option>
+                    <option value="high">€€€ Premium</option>
+                </select>
+                <select id="brand-filter">
+                    <option value="">🏷️ Toutes marques</option>
+                    <option value="CeraVe">CeraVe</option>
+                    <option value="La Roche-Posay">La Roche</option>
+                </select>
+                <button id="apply-filters" class="btn">🔍 Filtrer</button>
+            </div>
+            <div id="products-list" class="products-grid"></div>
+        </section>
+
+        <section id="history-section" class="tab-section">
+            <h2>📈 Votre historique</h2>
+            <table id="history-table">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Teint</th>
+                        <th>Type</th>
+                        <th>Problèmes</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+
+        <section id="reviews-section" class="tab-section">
+            <h2>⭐ Vos avis produits</h2>
+            <div class="rating">
+                <span class="stars" onclick="setRating(1)">★</span>
+                <span class="stars" onclick="setRating(2)">★</span>
+                <span class="stars" onclick="setRating(3)">★</span>
+                <span class="stars" onclick="setRating(4)">★</span>
+                <span class="stars" onclick="setRating(5)">★</span>
+                <span id="current-rating"></span>/5
+            </div>
+            <textarea id="review-text" placeholder="Votre avis sur un produit..."></textarea>
+            <button onclick="submitReview()" class="btn">📝 Publier</button>
+            <div id="reviews-list"></div>
+        </section>
+
+        <section id="community-section" class="tab-section">
+            <h2>💬 Communauté beauté</h2>
+            <div id="chat-messages"></div>
+            <div class="chat-input">
+                <input id="chat-input" placeholder="Partagez astuces/résultats...">
+                <button onclick="sendMessage()" class="btn">💬 Envoyer</button>
+            </div>
+        </section>
+    </div>
+
+    <script>
+const DATA = {
+  products: [
+    {"name":"CeraVe Pommade","brand":"CeraVe","price":"€12","type":"pommade","for":["sèche"],"issues":["sécheresse"]},
+    {"name":"La Roche Cicaplast","brand":"La Roche","price":"€15","type":"baume","for":["sensible"],"issues":["rougeurs"]},
+    {"name":"Paula BHA 2%","brand":"Paula's","price":"€35","type":"gommage","for":["grasse"],"issues":["pores"]},
+    {"name":"The Ordinary Salicylic","brand":"Ordinary","price":"€8","type":"exfoliant","for":["grasse"],"issues":["acné"]}
+  ]
+};
+
+let analysis = {teint: 'medium', type: 'mixte', issues: []};
+let profileData = {goals: 'general', history: []};
+let currentRating = 0;
+let canvas, ctx;
+
+document.addEventListener('DOMContentLoaded', initApp);
+
+function initApp() {
+  canvas = document.getElementById('analysis-canvas');
+  ctx = canvas.getContext('2d');
+  loadLocalData();
+  setupEvents();
+  showTab('analysis');
+  updateUserInfo();
+}
+
+function setupEvents() {
+  document.getElementById('photo-input').onchange = e => loadImage(e.target.files[0]);
+  document.getElementById('analyze-btn').onclick = analyzeImage;
+  document.getElementById('profile-form').onsubmit = saveProfile;
+  document.getElementById('apply-filters').onclick = applyFilters;
+  document.getElementById('chat-input').addEventListener('keypress', e => e.key === 'Enter' && sendMessage());
+}
+
+function loadLocalData() {
+  const savedProfile = localStorage.getItem('glowProfile');
+  if (savedProfile) profileData = JSON.parse(savedProfile);
+  renderHistory();
+  updateRecos();
+  loadReviews();
+  loadMessages();
+}
+
+function loadImage(file) {
+  const img = new Image();
+  img.onload = () => {
+    canvas.width = img.width;
+    canvas.height = img.height;
+    ctx.drawImage(img, 0, 0);
+    canvas.style.display = 'block';
+    document.getElementById('analyze-btn').disabled = false;
+  };
+  img.src = URL.createObjectURL(file);
+}
+
+function analyzeImage() {
+  // Simulate ROI center
+  const w = canvas.width * 0.3, h = canvas.height * 0.3;
+  const x = (canvas.width - w)/2, y = (canvas.height - h)/2;
+  const imageData = ctx.getImageData(x, y, w, h);
+  const stats = getImageStats(imageData);
+  
+  analysis = {
+    teint: stats.avgBright > 0.7 ? 'clair' : stats.avgBright > 0.4 ? 'moyen' : 'foncé',
+    type: stats.avgSat > 0.4 ? 'grasse' : 'sèche',
+    issues: stats.variance > 0.2 ? ['texture'] : []
+  };
+  
+  showAnalysisResults();
+  updateRecos();
+}
+
+function getImageStats(imageData) {
+  let r=0, g=0, b=0, bright=0, sat=0, count=0, variance=0;
+  const pixels = imageData.data;
+  let brightnesses = [];
+  
+  for (let i = 0; i < pixels.length; i += 4) {
+    const R = pixels[i]/255, G = pixels[i+1]/255, B = pixels[i+2]/255;
+    const avg = (R+G+B)/3;
+    brightnesses.push(avg);
+    bright += avg;
+    sat += avg > 0 ? 1 - Math.abs(R-G) + Math.abs(R-B) + Math.abs(G-B) : 0;
+    count++;
+  }
+  
+  // Variance
+  const mean = bright/count;
+  variance = brightnesses.reduce((sum, b) => sum + Math.pow(b-mean, 2), 0) / count;
+  
+  return { avgBright: mean, avgSat: sat/count, variance };
+}
+
+function showAnalysisResults() {
+  document.getElementById('analysis-results').style.display = 'block';
+  document.getElementById('analysis-results').innerHTML = `
+    <h3>Résultats IA:</h3>
+    <div style="font-size:1.2rem; margin:1rem 0;">
+      🎨 <strong>Teint:</strong> ${analysis.teint}<br>
+      🧪 <strong>Type:</strong> ${analysis.type}<br>
+      ⚠️ <strong>Problèmes:</strong> ${analysis.issues.join(', ') || 'Aucun'}
+    </div>
+  `;
+}
+
+function saveProfile(e) {
+  e.preventDefault();
+  profileData.goals = document.getElementById('goals').value;
+  profileData.history.unshift({
+    date: new Date().toLocaleDateString(),
+    teint: analysis.teint,
+    type: analysis.type,
+    issues: analysis.issues
+  });
+  profileData.history = profileData.history.slice(0,20);
+  localStorage.setItem('glowProfile', JSON.stringify(profileData));
+  document.getElementById('profile-display').innerHTML = `
+    <h4>Votre profil:</h4>
+    <p>🎯 Objectif: <strong>${profileData.goals}</strong></p>
+    <p>📈 Analyses: <strong>${profileData.history.length}</strong></p>
+  `;
+  renderHistory();
+}
+
+function applyFilters() {
+  const price = document.getElementById('price-filter').value;
+  const brand = document.getElementById('brand-filter').value;
+  let filtered = DATA.products;
+  
+  if (price) filtered = filtered.filter(p => p.price.includes(price[0]));
+  if (brand) filtered = filtered.filter(p => p.brand.includes(brand));
+  
+  renderProducts(filtered);
+}
+
+function renderProducts(products) {
+  document.getElementById('products-list').innerHTML = products.map(p => `
+    <div class="product-card">
+      <h4>${p.name}</h4>
+      <p>${p.price} - ${p.brand}</p>
+      <p><em>${p.utilite || p.for.join(', ')}</em></p>
+    </div>
+  `).join('');
+}
+
+function renderHistory() {
+  const tbody = document.querySelector('#history-table tbody');
+  tbody.innerHTML = profileData.history.slice(0,10).map(h => `
+    <tr>
+      <td>${h.date}</td>
+      <td>${h.teint}</td>
+      <td>${h.type}</td>
+      <td>${h.issues.join(', ') || 'OK'}</td>
+      <td><button onclick="deleteHistory(${profileData.history.indexOf(h)})" style="padding:4px 8px; font-size:0.8rem;">🗑️</button></td>
+    </tr>
+  `).join('');
+}
+
+function deleteHistory(index) {
+  profileData.history.splice(index, 1);
+  localStorage.setItem('glowProfile', JSON.stringify(profileData));
+  renderHistory();
+}
+
+function setRating(rating) {
+  currentRating = rating;
+  document.querySelectorAll('.stars').forEach((s,i) => s.classList.toggle('active', i < rating));
+  document.getElementById('current-rating').textContent = rating;
+}
+
+function submitReview() {
+  const text = document.getElementById('review-text').value.trim();
+  if (currentRating && text) {
+    const reviews = JSON.parse(localStorage.glowReviews || '[]');
+    reviews.unshift({rating: currentRating, text, date: new Date().toLocaleDateString()});
+    localStorage.glowReviews = JSON.stringify(reviews.slice(0,20));
+    document.getElementById('review-text').value = '';
+    currentRating = 0;
+    loadReviews();
+  }
+}
+
+function loadReviews() {
+  const reviews = JSON.parse(localStorage.glowReviews || '[]');
+  document.getElementById('reviews-list').innerHTML = reviews.map(r => `
+    <div class="review">
+      <div>${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)} (${r.rating}/5)</div>
+      <p>${r.text}</p>
+      <small>${r.date}</small>
+    </div>
+  `).join('');
+}
+
+function sendMessage() {
+  const text = document.getElementById('chat-input').value.trim();
+  if (text) {
+    const messages = JSON.parse(localStorage.glowMessages || '[]');
+    messages.unshift({text, time: new Date().toLocaleTimeString([],{hour:'2-digit', minute:'2-digit'})});
+    localStorage.glowMessages = JSON.stringify(messages.slice(0,50));
+    document.getElementById('chat-input').value = '';
+    loadMessages();
+  }
+}
+
+function loadMessages() {
+  const messages = JSON.parse(localStorage.glowMessages || '[]');
+  document.getElementById('chat-messages').innerHTML = messages.slice(0,15).map(m => `
+    <div class="message">
+      <p>${m.text}</p>
+      <small>${m.time}</small>
+    </div>
+  `).join('');
+  document.getElementById('chat-messages').scrollTop = 0;
+}
+
+function showTab(tab) {
+  document.querySelectorAll('.tab-section, .tab-btn').forEach(el => el.classList.remove('active'));
+  document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+  document.getElementById(tab + '-section').classList.add('active');
+}
+
+function updateUserInfo() {
+  const userId = localStorage.currentUser;
+  if (userId) {
+    const users = JSON.parse(localStorage.glowUsers || '[]');
+    const user = users.find(u => u.id == userId);
+    if (user) {
+      document.getElementById('userInfo').textContent = `Bonjour ${user.username}! ✨`;
+    }
+  }
+}
+
+function logout() {
+  if (confirm('Déconnexion?')) {
+    localStorage.removeItem('currentUser');
+    window.top.location.href = 'login.html';
+  }
+}
+
+// Initial renders
+updateRecos();
+    <script src="navigation.js"></script>
+</body>
+</html>

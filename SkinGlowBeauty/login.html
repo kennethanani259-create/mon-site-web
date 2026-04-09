@@ -1,0 +1,358 @@
+      <!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow Beauty - Connexion Sécurisée</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+:root {
+  --rose-elegant: #f8d7da;
+  --rose-subtil: #e9c6cf;
+  --mauve-doux: #d7bde2;
+  --creme-clair: #fdf2f8;
+  --beige-nude: #f5f5dc;
+  --beige-fonce: #d4af37;
+  --shadow-subtil: 0 8px 25px rgba(233, 198, 207, 0.3);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--creme-clair), var(--rose-subtil), var(--mauve-doux));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5c4033;
+}
+.login-container {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(10px);
+  padding: 3rem 2.5rem;
+  border-radius: 30px;
+  box-shadow: var(--shadow-subtil);
+  max-width: 420px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid rgba(233, 198, 207, 0.2);
+}
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.8rem;
+  background: linear-gradient(45deg, var(--beige-fonce), var(--rose-elegant));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+.slogan {
+  color: var(--rose-subtil);
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  font-weight: 300;
+}
+h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2rem;
+  color: var(--rose-elegant);
+  margin-bottom: 2rem;
+}
+.form-group {
+  margin-bottom: 1.8rem;
+  text-align: left;
+  position: relative;
+}
+label {
+  display: block;
+  margin-bottom: 0.8rem;
+  font-weight: 500;
+  color: #5c4033;
+  font-size: 0.95rem;
+}
+input[type="email"], input[type="text"], input[type="password"] {
+  width: 100%;
+  padding: 14px 20px;
+  border: 2px solid rgba(233, 198, 207, 0.5);
+  border-radius: 15px;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.8);
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+input:focus {
+  outline: none;
+  border-color: var(--rose-elegant);
+  box-shadow: 0 0 0 4px rgba(248, 215, 218, 0.2);
+  background: white;
+  transform: translateY(-1px);
+}
+.btn {
+  width: 100%;
+  padding: 15px;
+  background: linear-gradient(135deg, var(--rose-elegant), var(--rose-subtil));
+  color: #5c4033;
+  border: none;
+  border-radius: 25px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 1rem 0;
+  font-family: 'Poppins', sans-serif;
+  box-shadow: 0 4px 15px rgba(233, 198, 207, 0.3);
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(233, 198, 207, 0.4);
+}
+.btn:active {
+  transform: translateY(0);
+}
+.auth-toggle {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(233, 198, 207, 0.3);
+}
+.auth-toggle span {
+  color: var(--rose-subtil);
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+.auth-toggle span:hover {
+  color: var(--rose-elegant);
+}
+.hidden { display: none; }
+.success {
+  background: linear-gradient(135deg, #d4edda, #c3e6cb);
+  color: #155724;
+  padding: 1.2rem;
+  border-radius: 15px;
+  margin: 1rem 0;
+  border-left: 5px solid #28a745;
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.2);
+  animation: slideIn 0.3s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.error {
+  background: linear-gradient(135deg, #f8d7da, #f5c6cb);
+  color: #721c24;
+  padding: 1.2rem;
+  border-radius: 15px;
+  margin: 1rem 0;
+  border-left: 5px solid #dc3545;
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.2);
+}
+.loading {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 3px solid rgba(233, 198, 207, 0.3);
+  border-radius: 50%;
+  border-top-color: var(--rose-elegant);
+  animation: spin 1s ease-in-out infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@media (max-width: 480px) {
+  .login-container { padding: 2rem 1.5rem; margin: 1rem; }
+}
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">✨ SkinGlow Beauty</div>
+        <div class="slogan">Votre partenaire beauté personnalisée</div>
+        
+        <div id="register-form">
+            <h2>Rejoignez SkinGlow ✨</h2>
+            <p style="margin-bottom: 2rem; opacity: 0.8;">Créez votre compte gratuit en 30s pour vos analyses personnalisées</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">📧 Email</label>
+                    <input type="email" id="loginEmail" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">🔒 Mot de passe</label>
+                    <input type="password" id="loginPassword" placeholder="••••••••" required>
+                </div>
+                <button type="submit" class="btn" id="loginBtn">
+                    <span id="loginText">Entrer</span>
+                    <span id="loginSpinner" class="loading" style="display:none;"></span>
+                </button>
+            </form>
+            <div class="auth-toggle">
+                Déjà membre? <span onclick="toggleAuth('login')">Se connecter</span>
+            </div>
+
+        </div>
+
+        <div id="register-form" class="hidden">
+            <h2>Rejoignez-nous ✨</h2>
+            <p style="margin-bottom: 2rem; opacity: 0.8;">Créez votre compte en 30 secondes</p>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regEmail">📧 Email</label>
+                    <input type="email" id="regEmail" placeholder="votre@email.com" required>
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">👤 Nom d'utilisateur</label>
+                    <input type="text" id="regUsername" placeholder="@monpseudo" required maxlength="20">
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">🔒 Mot de passe (chiffres + lettres + signe)</label>
+                    <input type="password" id="regPassword" placeholder="Ex: MonPass123!" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">🔐 Confirmer</label>
+                    <input type="password" id="regConfirmPassword" placeholder="Répétez..." required>
+                </div>
+                <button type="submit" class="btn" id="registerBtn">
+                    <span id="registerText">S'inscrire</span>
+                    <span id="registerSpinner" class="loading" style="display:none;"></span>
+                </button>
+            </form>
+            <div class="auth-toggle">
+                Déjà membre? <span onclick="toggleAuth('login')">Se connecter</span>
+            </div>
+        </div>
+
+        <div id="dashboard-preview" class="hidden">
+            <h2>🎉 Bienvenue <span id="userName"></span>!</h2>
+            <div style="text-align:left; margin:1rem 0;">
+                <p>✨ <strong>Analyse peau</strong> Canvas IA</p>
+                <p>⭐ <strong>Profil personnalisé</strong> + historique</p>
+                <p>💬 <strong>Communauté</strong> astuces utilisateurs</p>
+                <p>🏆 <strong>Avis & ratings</strong> produits</p>
+            </div>
+            <button onclick="logout()" class="btn switch-auth">🔓 Déconnexion</button>
+        </div>
+
+        <div id="success-message" class="success hidden"></div>
+        <div id="error-message" class="error hidden"></div>
+    </div>
+
+    <script>
+class AuthManager {
+  constructor() {
+    this.users = JSON.parse(localStorage.glowUsers || '[]');
+    this.currentUserId = localStorage.currentUser;
+  }
+
+  showError(msg) {
+    const el = document.getElementById('error-message');
+    el.textContent = `❌ ${msg}`;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 4000);
+  }
+
+  showSuccess(msg) {
+    const el = document.getElementById('success-message');
+    el.textContent = `✅ ${msg}`;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 2000);
+  }
+
+  toggleForm(form) {
+    document.getElementById('login-form').classList.toggle('hidden', form !== 'login');
+    document.getElementById('register-form').classList.toggle('hidden', form !== 'register');
+  }
+
+  async register(email, username, password) {
+    // Création immédiate - qu'importe le mot de passe
+    const user = {
+      id: Date.now(),
+      email: email.trim().toLowerCase(),
+      username: username.trim(),
+      password, // Pas de validation stricte
+      joined: new Date().toLocaleDateString('fr-FR'),
+      profile: {history: [], goals: ''},
+      stats: {analyses: 0}
+    };
+    
+    this.users.push(user);
+    localStorage.glowUsers = JSON.stringify(this.users);
+    localStorage.currentUser = user.id;
+    this.showSuccess('Compte créé! Redirection profil...');
+    // Redirect vers profil complet
+    setTimeout(() => {
+      window.location.href = 'profile-complete.html';
+    }, 1500);
+  }
+
+  login(email, password) {
+    // Qu'importe les identifiants - connexion toujours OK
+    const user = this.users.find(u => u.email === email.toLowerCase().trim());
+    if (!user) {
+      // Créer utilisateur si inexistant
+      const newUser = {
+        id: Date.now(),
+        email: email.toLowerCase().trim(),
+        username: email.split('@')[0],
+        password,
+        joined: new Date().toLocaleDateString('fr-FR'),
+        profile: {history: [], goals: ''},
+        stats: {analyses: 0}
+      };
+      this.users.push(newUser);
+      localStorage.glowUsers = JSON.stringify(this.users);
+      localStorage.currentUser = newUser.id;
+    this.showSuccess('Bienvenue! Complétez profil...');
+    } else {
+      localStorage.currentUser = user.id;
+    this.showSuccess('Profil complété? Continuez...');
+    }
+    // Redirect direct
+    setTimeout(() => {
+      window.location.href = 'index-complete.html';
+    }, 1500);
+  }
+
+  showDashboard(user) {
+    document.querySelectorAll('#login-form, #register-form').forEach(f => f.classList.add('hidden'));
+    document.getElementById('dashboard-preview').classList.remove('hidden');
+    document.getElementById('userName').textContent = user.username;
+    this.showSuccess(`Bienvenue ${user.username}!`);
+  }
+
+  logout() {
+    localStorage.removeItem('currentUser');
+    location.reload();
+  }
+
+  getCurrentUser() {
+    if (!this.currentUserId) return null;
+    return this.users.find(u => u.id == this.currentUserId);
+  }
+}
+
+const auth = new AuthManager();
+
+// Events
+document.getElementById('registerForm').onsubmit = e => {
+  e.preventDefault();
+  const email = document.getElementById('regEmail').value;
+  const username = document.getElementById('regUsername').value;
+  const password = document.getElementById('regPassword').value;
+  auth.register(email, username, password);
+};
+
+document.getElementById('loginForm').onsubmit = e => {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+  auth.login(email, password);
+};
+
+// Check existing session
+if (auth.currentUserId) {
+  const user = auth.getCurrentUser();
+  if (user) auth.showDashboard(user);
+}
+    </script>
+    <script src="navigation.js"></script>
+</body>
+</html>

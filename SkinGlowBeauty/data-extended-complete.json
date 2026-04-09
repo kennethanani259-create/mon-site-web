@@ -1,0 +1,47 @@
+{
+  "skinTones": {
+    "fair": ["Porcelaine", "Ivoire", "Pêche"],
+    "medium": ["Beige", "Doré", "Olive"],
+    "dark": ["Richesse", "Ebène", "Profond"]
+  },
+  "skinTypes": ["sèche", "grasse", "mixte", "normale", "sensible"],
+  "issues": ["sécheresse", "brillance", "acné", "rides", "rougeurs", "taches", "pores", "texture"],
+  "treatments": ["pommade", "crème", "gommage", "sérum", "masque", "huile", "lotion", "baume"],
+  "routines": {
+    "matin": ["Nettoyant Doux Rosé {teint}", "Sérum Vitamine C Glow", "Crème Hydratation Rose {goal}", "SPF Magique Transparent ☀️"],
+    "soir": ["Huile Démaquillante Velours", "Sérum Traitement {teint} {goal}", "Crème Nuit Riche Rosée", "Masque Lèvres Gourmand 💋"]
+  },
+  "products": [
+    {"id":1,"name":"CeraVe Pommade Réparatrice","type":"pommade","brand":"CeraVe","price":"low","description":"Sécheresse sévère, barrière cutanée","tones":["all"],"suitableFor":["sèche","sensible"],"issues":["sécheresse"],"routine":"soir"},
+    {"id":2,"name":"La Roche-Posay Cicaplast Baume B5","type":"baume","brand":"La Roche-Posay","price":"low","description":"Irritations, post-gommage","tones":["all"],"suitableFor":["sensible"],"issues":["rougeurs"],"routine":"soir"},
+    {"id":3,"name":"Paula's Choice Skin Perfecting 2% BHA","type":"gommage liquide","brand":"Paula's Choice","price":"medium","description":"Pores, texture, acné","tones":["medium"],"suitableFor":["grasse","mixte"],"issues":["pores","acné"],"routine":"soir"},
+    {"id":4,"name":"The Ordinary Salicylic Acid 2%","type":"exfoliant","brand":"The Ordinary","price":"low","description":"Acné, points noirs","tones":["all"],"suitableFor":["grasse"],"issues":["acné"],"routine":"soir"},
+    {"id":5,"name":"Avène Gommage Doux","type":"gommage","brand":"Avène","price":"low","description":"Peaux sensibles, texture douce","tones":["fair"],"suitableFor":["sèche","sensible"],"issues":["texture"],"routine":"matin"},
+    {"id":6,"name":"Caudalie Gommage Resurfacing","type":"gommage","brand":"Caudalie","price":"medium","description":"Éclat, renouvellement cellulaire","tones":["fair","medium"],"suitableFor":["normale"],"issues":["texture"],"routine":"soir"},
+    {"id":7,"name":"Eucerin UreaRepair 10% Crème","type":"crème","brand":"Eucerin","price":"low","description":"Sécheresse extrême, rugosité","tones":["all"],"suitableFor":["sèche"],"issues":["sécheresse"],"routine":"matin/soir"},
+    {"id":8,"name":"Bioderma Sébium Pore Refiner","type":"sérum","brand":"Bioderma","price":"low","description":"Réduire pores visibles","tones":["medium"],"suitableFor":["grasse"],"issues":["pores"],"routine":"matin"},
+    {"id":9,"name":"Vichy Normaderm Phytosolution","type":"crème","brand":"Vichy","price":"medium","description":"Acné adulte","tones":["all"],"suitableFor":["mixte","grasse"],"issues":["acné"],"routine":"matin"},
+    {"id":10,"name":"Nuxe Rêve de Miel Pommade","type":"pommade","brand":"Nuxe","price":"low","description":"Lèvres sèches, zones sèches","tones":["fair"],"suitableFor":["sèche"],"issues":["sécheresse"],"routine":"soir"},
+    {"id":11,"name":"Garnier Pure Active Gommage","type":"gommage","brand":"Garnier","price":"low","description":"Acné, peaux grasses","tones":["medium","dark"],"suitableFor":["grasse"],"issues":["acné"],"routine":"matin"},
+    {"id":12,"name":"L'Oréal Revitalift Laser X3 Crème","type":"crème","brand":"L'Oréal","price":"medium","description":"Rides, fermeté","tones":["fair"],"suitableFor":["normale"],"issues":["rides"],"routine":"soir"},
+    {"id":13,"name":"RoC Retinol Correxion","type":"sérum","brand":"RoC","price":"medium","description":"Rides fines","tones":["all"],"suitableFor":["mixte"],"issues":["rides"],"routine":"soir"},
+    {"id":14,"name":"La Roche-Posay Effaclar Duo","type":"crème","brand":"La Roche-Posay","price":"low","description":"Marcs acné","tones":["all"],"suitableFor":["grasse"],"issues":["taches"],"routine":"matin"},
+    {"id":15,"name":"Avène Cleanance Comedomed","type":"gel localisé","brand":"Avène","price":"low","description":"Boutons localisés","tones":["medium"],"suitableFor":["mixte"],"issues":["acné"],"routine":"soir"},
+    {"id":16,"name":"Uriage Bariéderm Crème","type":"crème réparatrice","brand":"Uriage","price":"low","description":"Post-procédés, irritations","tones":["all"],"suitableFor":["sensible"],"issues":["rougeurs"],"routine":"soir"},
+    {"id":17,"name":"Topicrem Gommage Ultra-Doux","type":"gommage","brand":"Topicrem","price":"low","description":"Peaux atopiques","tones":["fair"],"suitableFor":["sèche"],"issues":["texture"],"routine":"matin"},
+    {"id":18,"name":"Mustela Stelatopia Crème","type":"crème","brand":"Mustela","price":"medium","description":"Eczéma bébé/adulte","tones":["all"],"suitableFor":["sèche"],"issues":["sécheresse"],"routine":"matin/soir"},
+    {"id":19,"name":"Bepanthen Pommade Sensible","type":"pommade","brand":"Bepanthen","price":"low","description":"Irritations diverses","tones":["all"],"suitableFor":["sensible"],"issues":["rougeurs"],"routine":"soir"},
+    {"id":20,"name":"A-Derma Exomega Control Crème","type":"crème","brand":"A-Derma","price":"medium","description":"Atopie, démangeaisons","tones":["all"],"suitableFor":["sèche"],"issues":["sécheresse"],"routine":"soir"},
+    {"id":21,"name":"Effaclar Mat Lotion","type":"lotion","brand":"La Roche-Posay","price":"low","description":"Peaux grasses, pores","tones":["medium"],"suitableFor":["grasse"],"issues":["pores"],"routine":"matin"},
+    {"id":22,"name":"Hydrabio Sérum","type":"sérum","brand":"Bioderma","price":"medium","description":"Déshydratation","tones":["fair"],"suitableFor":["sèche"],"issues":["texture"],"routine":"matin"},
+    {"id":23,"name":"Filorga Time-Filler Crème","type":"crème","brand":"Filorga","price":"high","description":"Rides expression","tones":["all"],"suitableFor":["normale"],"issues":["rides"],"routine":"matin"},
+    {"id":24,"name":"Nivea Q10 Power Crème Anti-Âge","type":"crème","brand":"Nivea","price":"low","description":"Anti-âge entrée gamme","tones":["fair"],"suitableFor":["normale"],"issues":["rides"],"routine":"soir"},
+    {"id":25,"name":"Garnier SkinActive Gommage 3en1","type":"gommage","brand":"Garnier","price":"low","description":"Peeling doux multi-usages","tones":["medium"],"suitableFor":["mixte"],"issues":["texture"],"routine":"matin"},
+    {"id":26,"name":"Lierac Premium Masque","type":"masque","brand":"Lierac","price":"high","description":"Liftant intense","tones":["fair"],"suitableFor":["normale"],"issues":["rides"],"routine":"soir"},
+    {"id":27,"name":"Glossier Balm Dotcom Rose","type":"baume","brand":"Glossier","price":"medium","description":"Lèvres glow","tones":["fair","medium"],"suitableFor":["sèche","sensible"],"issues":["sécheresse"],"routine":"matin"},
+    {"id":28,"name":"Dior Addict Lip Glow Mauve","type":"baume teinté","brand":"Dior","price":"high","description":"Lèvres colorées","tones":["all"],"suitableFor":["all"],"issues":["all"],"routine":"matin"},
+    {"id":29,"name":"Rare Beauty Soft Pinch Liquid Blush","type":"blush","brand":"Rare Beauty","price":"medium","description":"Éclat joues","tones":["medium","dark"],"suitableFor":["mixte","grasse"],"issues":["éclat"],"routine":"matin"},
+    {"id":30,"name":"Fenty Beauty Gloss Bomb","type":"gloss","brand":"Fenty Beauty","price":"high","description":"Lèvres brillantes","tones":["dark"],"suitableFor":["grasse"],"issues":["brillance"],"routine":"matin"}
+  ]
+}
+

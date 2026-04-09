@@ -1,0 +1,98 @@
+{
+  "routines": {
+    "matin": [
+      "Nettoyant Doux Rosé {teint}",
+      "Sérum Vitamine C Glow",
+      "Crème Hydratation Rose {goal}",
+      "SPF Magique Transparent ☀️"
+    ],
+    "soir": [
+      "Huile Démaquillante Velours",
+      "Sérum Traitement {teint} {goal}",
+      "Crème Nuit Riche Rosée",
+      "Masque Lèvres Gourmand 💋"
+    ]
+  },
+  "products": [
+    {
+      "name": "Glossier Balm Dotcom Rose",
+      "type": "Baume Magique",
+      "brand": "Glossier",
+      "price": "medium",
+      "tones": ["fair", "medium"],
+      "suitableFor": ["sèche", "sensible"],
+      "issues": ["sécheresse", "lèvres"],
+      "ingredients": ["Huile Rose", "Vit E", "Beurre Mangue"]
+    },
+    {
+      "name": "Dior Addict Lip Glow Mauve",
+      "type": "Baume Teinté",
+      "brand": "Dior",
+      "price": "high",
+      "tones": ["all"],
+      "suitableFor": ["all"],
+      "issues": ["toutes"],
+      "ingredients": ["Huile Abyssin", "Ceramides"]
+    },
+    {
+      "name": "Rare Beauty Soft Pinch Liquid Blush",
+      "type": "Blush Glow",
+      "brand": "Rare Beauty",
+      "price": "medium",
+      "tones": ["medium", "dark"],
+      "suitableFor": ["mixte", "grasse"],
+      "issues": ["éclat", "glow"],
+      "ingredients": ["Peptides", "Hydratants"]
+    },
+    {
+      "name": "Fenty Beauty Gloss Bomb",
+      "type": "Gloss Universel",
+      "brand": "Fenty Beauty",
+      "price": "high",
+      "tones": ["dark"],
+      "suitableFor": ["grasse"],
+      "issues": ["brillance"],
+      "ingredients": ["Huile Praline", "Vit E"]
+    },
+    {
+      "name": "Laneige Lip Sleeping Mask Rose",
+      "type": "Masque Nuit",
+      "brand": "Laneige",
+      "price": "low",
+      "tones": ["fair"],
+      "suitableFor": ["sèche"],
+      "issues": ["sécheresse"],
+      "ingredients": ["Beurre Murumuru", "Extrait Rose"]
+    },
+    {
+      "name": "Youth To The People Kale Cleanser",
+      "type": "Nettoyant Vert Glow",
+      "brand": "Youth To The People",
+      "price": "medium",
+      "tones": ["all"],
+      "suitableFor": ["mixte"],
+      "issues": ["pores", "glow"],
+      "ingredients": ["Kale", "Épinards", "Thé Vert"]
+    },
+    {
+      "name": "Charlotte Tilbury Magic Cream",
+      "type": "Crème Miracle",
+      "brand": "Charlotte Tilbury",
+      "price": "high",
+      "tones": ["fair"],
+      "suitableFor": ["sèche"],
+      "issues": ["rides", "glow"],
+      "ingredients": ["Peptides Rose", "Hyaluronique"]
+    },
+    {
+      "name": "Drunk Elephant C-Firma Serum",
+      "type": "Sérum Vit C",
+      "brand": "Drunk Elephant",
+      "price": "high",
+      "tones": ["all"],
+      "suitableFor": ["all"],
+      "issues": ["éclat", "taches"],
+      "ingredients": ["Vit C Pure", "Ferulic"]
+    }
+  ]
+}

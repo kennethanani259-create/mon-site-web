@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow Beauty 💖 - Analyse IA & Recos Personnalisées</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <button class="logout-btn" onclick="logout()" id="logout-btn" style="display:none;">🔓 Déconnexion</button>
+    
+    <header class="header-glow">
+        <h1>SkinGlow Beauty ✨</h1>
+        <div class="user-info" id="userInfo">Connectez-vous pour commencer 💖</div>
+    </header>
+
+    <nav class="nav-tabs" id="nav-tabs" style="display:none;">
+        <button class="tab-btn active" onclick="showTab('analysis')">📸 Analyse Glow</button>
+        <button class="tab-btn" onclick="showTab('profile')">💕 Profil</button>
+        <button class="tab-btn" onclick="showTab('recommendations')">🌟 Recommandations</button>
+        <button class="tab-btn" onclick="showTab('history')">📊 Historique</button>
+        <button class="tab-btn" onclick="showTab('reviews')">⭐ Avis</button>
+        <button class="tab-btn" onclick="showTab('community')">💬 Communauté</button>
+    </nav>
+
+    <main id="main-content">
+        <!-- Login prompt if not auth -->
+        <div id="login-prompt" class="glow-section">
+            <h2>🔐 Accès Réservé</h2>
+            <p>Connectez-vous pour débloquer l'analyse IA, votre profil personnalisé et les recommandations magiques!</p>
+            <a href="login.html" class="btn" style="display:inline-block;">Se Connecter ✨</a>
+        </div>
+
+        <!-- Tab content -->
+        <div class="tab-content" id="tab-content" style="display:none;">
+            <section id="analysis-section" class="tab-section active glow-section">
+                <h2>📸 Mon Glow Analysis</h2>
+                <div class="upload-area" onclick="document.getElementById('photo-input').click()">
+                    <input type="file" id="photo-input" accept="image/*" capture="user">
+                    <div class="upload-icon">📸</div>
+                    <p>Upload ton selfie glowy (clique joues pour ROI rose)</p>
+                </div>
+                <canvas id="analysis-canvas"></canvas>
+                <button id="analyze-btn" class="btn" disabled>✨ Analyser Mon Teint IA</button>
+                <div id="analysis-results" class="results-card"></div>
+            </section>
+
+            <section id="profile-section" class="tab-section glow-section">
+                <h2>💕 Mon Profil Rosé</h2>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label id="goals-label">Objectif Beauty:</label>
+                        <select id="goals">
+                            <option value="glow">Glow Magique ✨</option>
+                            <option value="anti-aging">Youthful 💖</option>
+                            <option value="purete">Pureté Pure 🌸</option>
+                            <option value="eclat">Éclat Rosé 💫</option>
+                            <option value="hydrate">Hydratation 💧</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">💾 Save My Glow</button>
+                </form>
+                <div id="profile-display" class="results-card"></div>
+            </section>
+
+            <section id="recommendations-section" class="tab-section glow-section">
+                <h2>🌟 Mes Recos Magiques</h2>
+                <div class="filters">
+                    <select id="price-filter">
+                        <option value="">Tous Budgets 💸</option>
+                        <option value="low">💸 Budget</option>
+                        <option value="medium">💰 Moyen</option>
+                        <option value="high">💎 Luxe</option>
+                    </select>
+                    <select id="brand-filter">
+                        <option value="">Toutes Marques</option>
+                        <option value="CeraVe">CeraVe</option>
+                        <option value="La Roche-Posay">La Roche</option>
+                        <option value="Glossier">Glossier</option>
+                        <option value="Dior">Dior</option>
+                    </select>
+                    <button id="apply-filters" class="btn">Filtrer ✨</button>
+                </div>
+                <div id="routine-display">
+                    <h3>🌅 Morning Glow Ritual</h3>
+                    <ol id="morning-routine"></ol>
+                    <h3>🌙 Evening Beauty Magic</h3>
+                    <ol id="evening-routine"></ol>
+                </div>
+                <div id="products-list" class="products-grid"></div>
+            </section>
+
+            <section id="history-section" class="tab-section glow-section">
+                <h2>📊 Mon Journey Glow</h2>
+                <table id="history-table">
+                    <thead>
+                        <tr>
+                            <th>Date ✨</th>
+                            <th>Teint</th>
+                            <th>Sous-ton</th>
+                            <th>Type</th>
+                            <th>Issues</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+                <button id="clear-history" class="btn">🪄 Reset Journey</button>
+            </section>
+
+            <section id="reviews-section" class="tab-section glow-section">
+                <h2>⭐ Mes Avis Produits</h2>
+                <div class="rating">
+                    <span class="stars" onclick="setRating(1)">★</span>
+                    <span class="stars" onclick="setRating(2)">★</span>
+                    <span class="stars" onclick="setRating(3)">★</span>
+                    <span class="stars" onclick="setRating(4)">★</span>
+                    <span class="stars" onclick="setRating(5)">★</span>
+                    <span id="current-rating"></span>/5
+                </div>
+                <textarea id="review-text" placeholder="Ton avis sur un produit..."></textarea>
+                <button onclick="submitReview()" class="btn">📝 Publier Avis</button>
+                <div id="reviews-list" class="results-card"></div>
+            </section>
+
+            <section id="community-section" class="tab-section glow-section">
+                <h2>💬 Communauté Beauty</h2>
+                <div id="chat-messages"></div>
+                <div class="chat-input">
+                    <input id="chat-input" placeholder="Partage astuces glow...">
+                    <button onclick="sendMessage()" class="btn">💬 Envoyer</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="navigation.js"></script>
+    <script>
+        // Tab system from app.html
+        function showTab(tab) {
+            document.querySelectorAll('.tab-section, .tab-btn').forEach(el => el.classList.remove('active'));
+            document.querySelector(`[onclick="showTab('${tab}')"]`).classList.add('active');
+            document.getElementById(tab + '-section').classList.add('active');
+        }
+
+        // Reviews/Chat from app.html (user-specific)
+        let currentRating = 0;
+        function setRating(rating) {
+            currentRating = rating;
+            document.querySelectorAll('.stars').forEach((s,i) => s.classList.toggle('active', i < rating));
+            document.getElementById('current-rating').textContent = ` ${rating}`;
+        }
+
+        function submitReview() {
+            const text = document.getElementById('review-text').value.trim();
+            if (currentRating && text) {
+                const userId = localStorage.currentUser;
+                const reviews = JSON.parse(localStorage.getItem(`glowReviews_${userId}`) || '[]');
+                reviews.unshift({rating: currentRating, text, date: new Date().toLocaleDateString()});
+                localStorage.setItem(`glowReviews_${userId}`, JSON.stringify(reviews.slice(0,20)));
+                document.getElementById('review-text').value = '';
+                currentRating = 0;
+                loadReviews();
+            }
+        }
+
+        function loadReviews() {
+            const userId = localStorage.currentUser;
+            const reviews = JSON.parse(localStorage.getItem(`glowReviews_${userId}`) || '[]');
+            document.getElementById('reviews-list').innerHTML = reviews.map(r => `
+                <div class="review">
+                    <div>${'★'.repeat(r.rating)}${'☆'.repeat(5-r.rating)} (${r.rating}/5)</div>
+                    <p>${r.text}</p>
+                    <small>${r.date}</small>
+                </div>
+            `).join('');
+        }
+
+        function sendMessage() {
+            const text = document.getElementById('chat-input').value.trim();
+            if (text) {
+                const userId = localStorage.currentUser;
+                const messages = JSON.parse(localStorage.getItem(`glowMessages_${userId}`) || '[]');
+                messages.unshift({text, time: new Date().toLocaleTimeString([],{hour:'2-digit', minute:'2-digit'})});
+                localStorage.setItem(`glowMessages_${userId}`, JSON.stringify(messages.slice(0,50)));
+                document.getElementById('chat-input').value = '';
+                loadMessages();
+            }
+        }
+
+        function loadMessages() {
+            const userId = localStorage.currentUser;
+            const messages = JSON.parse(localStorage.getItem(`glowMessages_${userId}`) || '[]');
+            document.getElementById('chat-messages').innerHTML = messages.slice(0,15).map(m => `
+                <div class="message">
+                    <p>${m.text}</p>
+                    <small>${m.time}</small>
+                </div>
+            `).join('');
+            document.getElementById('chat-messages').scrollTop = 0;
+        }
+
+        function logout() {
+            if (confirm('Déconnexion?')) {
+                localStorage.removeItem('currentUser');
+                location.reload();
+            }
+        }
+
+        // Check auth & init
+        document.addEventListener('DOMContentLoaded', () => {
+            const userId = localStorage.currentUser;
+            if (userId) {
+                const users = JSON.parse(localStorage.glowUsers || '[]');
+                const user = users.find(u => u.id == userId);
+                if (user) {
+                    document.getElementById('userInfo').textContent = `Bonjour ${user.username}! ✨`;
+                    document.getElementById('logout-btn').style.display = 'block';
+                    document.getElementById('nav-tabs').style.display = 'flex';
+                    document.getElementById('tab-content').style.display = 'block';
+                    document.getElementById('login-prompt').style.display = 'none';
+                    loadReviews();
+                    loadMessages();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+

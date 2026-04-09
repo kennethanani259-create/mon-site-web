@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow Beauty - Profil Complet ✨</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="login-container" style="max-width: 500px; padding: 3rem;">
+        <div class="logo" style="font-size: 2.5rem; margin-bottom: 1rem;">✨ SkinGlow Beauty</div>
+        <h2 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--rose-elegant); margin-bottom: 2rem;">Complétez votre profil 💖</h2>
+        
+        <form id="profileForm">
+            <div class="form-group">
+                <label for="firstName">👩 Prénom</label>
+                <input type="text" id="firstName" placeholder="Marie" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">👩 Nom</label>
+                <input type="text" id="lastName" placeholder="Dupont" required>
+            </div>
+            <div class="form-group">
+                <label for="age">🎂 Âge</label>
+                <input type="number" id="age" placeholder="25" min="16" max="80" required>
+            </div>
+            <div class="form-group">
+                <label for="skinType">🧪 Type de peau habituel</label>
+                <select id="skinType" required>
+                    <option value="">Choisir...</option>
+                    <option value="sèche">Sèche</option>
+                    <option value="grasse">Grasse</option>
+                    <option value="mixte">Mixte</option>
+                    <option value="normale">Normale</option>
+                    <option value="sensible">Sensible</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="concerns">🎯 Problèmes principaux</label>
+                <select id="concerns" required>
+                    <option value="">Choisir principal...</option>
+                    <option value="sécheresse">Sécheresse</option>
+                    <option value="acné">Acné</option>
+                    <option value="rides">Rides</option>
+                    <option value="pores">Pores</option>
+                    <option value="rougeurs">Rougeurs</option>
+                    <option value="taches">Taches</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="goals">💫 Objectif beauté</label>
+                <select id="goals" required>
+                    <option value="">Choisir...</option>
+                    <option value="glow">Glow naturel ✨</option>
+                    <option value="anti-aging">Anti-âge ⏳</option>
+                    <option value="purete">Purété 🌸</option>
+                    <option value="eclat">Éclat 💎</option>
+                    <option value="hydrate">Hydratation 💧</option>
+                </select>
+            </div>
+            <button type="submit" class="btn" style="margin-top: 1.5rem;">🚀 Commencer mon Glow!</button>
+        </form>
+
+        <div id="success-message" class="success hidden" style="margin-top: 1.5rem;"></div>
+        <div id="error-message" class="error hidden" style="margin-top: 1.5rem;"></div>
+    </div>
+
+    <script>
+document.getElementById('profileForm').onsubmit = function(e) {
+  e.preventDefault();
+  
+  const profileData = {
+    firstName: document.getElementById('firstName').value.trim(),
+    lastName: document.getElementById('lastName').value.trim(),
+    age: parseInt(document.getElementById('age').value),
+    skinType: document.getElementById('skinType').value,
+    concerns: document.getElementById('concerns').value,
+    goals: document.getElementById('goals').value,
+    completed: new Date().toLocaleDateString('fr-FR')
+  };
+
+  if (!localStorage.currentUser) {
+    document.getElementById('error-message').textContent = 'Erreur session';
+    document.getElementById('error-message').classList.remove('hidden');
+    return;
+  }
+
+  // Récupérer user et ajouter profil
+  const users = JSON.parse(localStorage.glowUsers || '[]');
+  const userIndex = users.findIndex(u => u.id == localStorage.currentUser);
+  if (userIndex > -1) {
+    users[userIndex].profileData = profileData;
+    localStorage.glowUsers = JSON.stringify(users);
+    
+    document.getElementById('success-message').textContent = `Profil enregistré ${profileData.firstName}! ✨ Redirection...`;
+    document.getElementById('success-message').classList.remove('hidden');
+    
+    setTimeout(() => {
+      window.location.href = 'index-complete.html';
+    }, 1500);
+  } else {
+    document.getElementById('error-message').textContent = 'Erreur session utilisateur';
+    document.getElementById('error-message').classList.remove('hidden');
+  }
+};
+    </script>
+    <script src="navigation.js"></script>
+</body>
+</html>
+

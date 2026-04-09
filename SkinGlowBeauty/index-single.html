@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SkinGlow Beauty - Connexion</title>
+    <style>
+@import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap');
+:root {
+  --rose-elegant: #f8d7da;
+  --rose-subtil: #e9c6cf;
+  --creme-clair: #fdf2f8;
+  --beige-fonce: #d4af37;
+  --shadow-subtil: 0 4px 20px rgba(244, 215, 218, 0.3);
+}
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body {
+  font-family: 'Poppins', sans-serif;
+  background: linear-gradient(135deg, var(--creme-clair), var(--rose-subtil));
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #5c4033;
+}
+.login-container {
+  background: rgba(255,255,255,0.95);
+  padding: 3rem;
+  border-radius: 25px;
+  box-shadow: var(--shadow-subtil);
+  max-width: 400px;
+  width: 90%;
+  text-align: center;
+}
+.logo {
+  font-family: 'Dancing Script', cursive;
+  font-size: 2.5rem;
+  color: var(--beige-fonce);
+  margin-bottom: 1rem;
+}
+.login-container h2 {
+  font-family: 'Dancing Script', cursive;
+  font-size: 1.8rem;
+  color: var(--rose-elegant);
+  margin-bottom: 2rem;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: var(--rose-subtil);
+}
+input[type="text"], input[type="email"], input[type="password"] {
+  width: 100%;
+  padding: 12px 18px;
+  border: 2px solid var(--rose-subtil);
+  border-radius: 15px;
+  font-size: 1rem;
+  transition: border-color 0.3s, box-shadow 0.3s;
+  font-family: inherit;
+}
+input:focus {
+  outline: none;
+  border-color: var(--rose-elegant);
+  box-shadow: 0 0 0 3px rgba(248, 215, 218, 0.2);
+}
+.btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, var(--rose-elegant), var(--rose-subtil));
+  color: #5c4033;
+  border: none;
+  border-radius: 20px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 1rem;
+}
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-subtil);
+}
+.switch-auth {
+  background: transparent;
+  color: var(--rose-subtil);
+  border: 2px solid var(--rose-subtil);
+}
+.switch-auth:hover {
+  background: var(--rose-subtil);
+  color: white;
+}
+.auth-toggle {
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  color: var(--rose-subtil);
+}
+.auth-toggle span:hover {
+  color: var(--rose-elegant);
+  cursor: pointer;
+  text-decoration: underline;
+}
+.hidden {
+  display: none;
+}
+.success {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  border-left: 4px solid #28a745;
+}
+@media (max-width: 480px) {
+  .login-container {
+    padding: 2rem 1.5rem;
+  }
+}
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo">🧴 SkinGlow Beauty</div>
+        
+        <div id="login-form">
+            <h2>Connexion</h2>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email:</label>
+                    <input type="email" id="loginEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">Mot de passe:</label>
+                    <input type="password" id="loginPassword" required>
+                </div>
+                <button type="submit" class="btn">👤 Se connecter</button>
+            </form>
+            <div class="auth-toggle">
+                Pas de compte ? <span onclick="toggleAuth('register')">Créer un compte</span>
+            </div>
+        </div>
+
+        <div id="register-form" class="hidden">
+            <h2>Inscription</h2>
+            <form id="registerForm">
+                <div class="form-group">
+                    <label for="regEmail">Email:</label>
+                    <input type="email" id="regEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="regUsername">Nom d'utilisateur:</label>
+                    <input type="text" id="regUsername" required>
+                </div>
+                <div class="form-group">
+                    <label for="regPassword">Mot de passe (6+ chars):</label>
+                    <input type="password" id="regPassword" required minlength="6">
+                </div>
+                <div class="form-group">
+                    <label for="regConfirmPassword">Confirmer:</label>
+                    <input type="password" id="regConfirmPassword" required>
+                </div>
+                <button type="submit" class="btn">✅ Créer compte</button>
+            </form>
+            <div class="auth-toggle">
+                Déjà membre ? <span onclick="toggleAuth('login')">Se connecter</span>
+            </div>
+        </div>
+
+        <div id="app-container" class="hidden">
+            <button onclick="logout()" class="switch-auth btn">Déconnexion</button>
+            <iframe src="app.html" style="width:100%; height:600px; border:none; border-radius:20px;"></iframe>
+        </div>
+
+        <div id="success-message" class="success hidden">
+            ✅ Connexion réussie! Chargement...
+        </div>
+        <div id="error-message" style="background:#f8d7da; color:#721c24; padding:1rem; border-radius:10px; margin:1rem 0; display:none;"></div>
+    </div>
+
+<script>
+let users = JSON.parse(localStorage.glowUsers || '[]');
+let currentUser = localStorage.currentUser;
+
+// Show error
+function showError(msg) {
+  const el = document.getElementById('error-message');
+  el.textContent = msg;
+  el.style.display = 'block';
+  setTimeout(() => el.style.display = 'none', 5000);
+}
+
+// Toggle forms
+function toggleAuth(form) {
+  document.getElementById('login-form').classList.toggle('hidden', form === 'register');
+  document.getElementById('register-form').classList.toggle('hidden', form === 'login');
+}
+
+// Register
+document.getElementById('registerForm').onsubmit = function(e) {
+  e.preventDefault();
+  const email = document.getElementById('regEmail').value.trim();
+  const username = document.getElementById('regUsername').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+  if (password.length < 6) {
+    showError('Mot de passe trop court (6+ caractères)');
+    return;
+  }
+  if (password !== confirmPassword) {
+    showError('Mots de passe différents');
+    return;
+  }
+  if (users.find(u => u.email === email)) {
+    showError('Email déjà utilisé');
+    return;
+  }
+  if (users.find(u => u.username === username)) {
+    showError('Nom d\\'utilisateur pris');
+    return;
+  }
+
+  const user = {id: Date.now(), email, username, password, createdAt: new Date().toLocaleDateString(), profile: {history: []}};
+  users.push(user);
+  localStorage.glowUsers = JSON.stringify(users);
+  localStorage.currentUser = user.id;
+  loginSuccess();
+};
+
+// Login
+document.getElementById('loginForm').onsubmit = function(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+
+  const user = users.find(u => u.email === email && u.password === password);
+  if (!user) {
+    showError('Email ou mot de passe incorrect');
+    return;
+  }
+  localStorage.currentUser = user.id;
+  loginSuccess();
+};
+
+function loginSuccess() {
+  document.querySelectorAll('#login-form, #register-form').forEach(form => form.classList.add('hidden'));
+  document.getElementById('success-message').textContent = 'Bienvenue! Redirection...';
+  document.getElementById('success-message').classList.remove('hidden');
+  setTimeout(() => {
+    document.getElementById('app-container').classList.remove('hidden');
+    document.getElementById('success-message').classList.add('hidden');
+  }, 1500);
+}
+
+function logout() {
+  localStorage.removeItem('currentUser');
+  location.reload();
+}
+
+// Check login status
+if (localStorage.currentUser) {
+  const user = users.find(u => u.id == localStorage.currentUser);
+  if (user) {
+    loginSuccess();
+  }
+}
+</script>
+</body>
+</html>
+
+    <script>
+let users = JSON.parse(localStorage.glowUsers || '[]');
+let currentUser = localStorage.currentUser || null;
+
+// Toggle forms
+function toggleAuth(form) {
+  document.getElementById('login-form').classList.toggle('hidden', form === 'register');
+  document.getElementById('register-form').classList.toggle('hidden', form === 'login');
+}
+
+// Register
+document.getElementById('registerForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('regEmail').value;
+  const username = document.getElementById('regUsername').value;
+  const password = document.getElementById('regPassword').value;
+  const confirmPassword = document.getElementById('regConfirmPassword').value;
+
+  if (password !== confirmPassword) {
+    alert('Les mots de passe ne correspondent pas!');
+    return;
+  }
+
+  if (users.find(u => u.email === email)) {
+    alert('Cet email est déjà utilisé!');
+    return;
+  }
+
+  const user = {
+    id: Date.now(),
+    email,
+    username,
+    password, // Note: In real app, hash passwords
+    createdAt: new Date().toLocaleDateString(),
+    profile: { history: [] }
+  };
+
+  users.push(user);
+  localStorage.glowUsers = JSON.stringify(users);
+  localStorage.currentUser = user.id;
+  showSuccess('Compte créé avec succès!');
+});
+
+// Login
+document.getElementById('loginForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value;
+  const password = document.getElementById('loginPassword').value;
+
+  const user = users.find(u => u.email === email && u.password === password);
+  if (user) {
+    localStorage.currentUser = user.id;
+    showSuccess('Connexion réussie!');
+  } else {
+    alert('Email ou mot de passe incorrect!');
+  }
+});
+
+function showSuccess(message) {
+  document.getElementById('success-message').textContent = message;
+  document.getElementById('success-message').classList.remove('hidden');
+  setTimeout(() => {
+    // In real app, redirect to app
+    window.location.href = 'index-single.html#dashboard'; // Simulate redirect
+    // Load user data
+    loadUserData();
+  }, 1500);
+}
+
+function loadUserData() {
+  const userId = localStorage.currentUser;
+  if (userId) {
+    const user = users.find(u => u.id == userId);
+    if (user) {
+      // Load user profile, history, etc.
+      console.log('User data loaded:', user.username);
+    }
+  }
+}
+
+if (localStorage.currentUser) {
+  // User already logged in
+  document.body.innerHTML += '<script>loadUserData();</script>';
+}
+
+// Check if user is logged in
+if (localStorage.currentUser) {
+  window.location.href = 'index-single.html'; // Redirect to main app
+}
+    </script>
+</body>
+</html>
